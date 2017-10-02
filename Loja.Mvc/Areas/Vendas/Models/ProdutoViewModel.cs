@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Loja.Mvc.Models
+namespace Loja.Mvc.Areas.Vendas.Models
 {
     public class ProdutoViewModel
     {

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Loja.Repositorios.SqlServer.EF;
 using System.Data.Entity;
 
-namespace Loja.Mvc.Controllers
+namespace Loja.Mvc.Areas.Vendas.Controllers
 {
     public class ImagemProdutoController : Controller
     {

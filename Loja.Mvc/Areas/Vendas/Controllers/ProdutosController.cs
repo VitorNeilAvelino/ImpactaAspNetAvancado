@@ -1,13 +1,12 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Loja.Dominio;
 using Loja.Repositorios.SqlServer.EF;
 using Loja.Mvc.Helpers;
-using Loja.Mvc.Models;
+using Loja.Mvc.Areas.Vendas.Models;
 
-namespace Loja.Mvc.Controllers
+namespace Loja.Mvc.Areas.Vendas.Controllers
 {
     public class ProdutosController : Controller
     {

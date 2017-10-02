@@ -1,10 +1,9 @@
 ﻿using Loja.Dominio;
-using Loja.Mvc.Models;
+using Loja.Mvc.Areas.Vendas.Models;
 using Loja.Repositorios.SqlServer.EF;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Loja.Mvc.Helpers
