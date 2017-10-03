@@ -129,6 +129,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Produtos\ProdutosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Usuarios\UsuariosController.cs" />
     <Compile Include="Areas\Vendas\VendasAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Vendas\Controllers\ImagemProdutoController.cs" />
@@ -151,6 +154,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Vendas\Views\web.config" />
     <Content Include="Areas\Vendas\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Produtos\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -186,6 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Vendas\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
