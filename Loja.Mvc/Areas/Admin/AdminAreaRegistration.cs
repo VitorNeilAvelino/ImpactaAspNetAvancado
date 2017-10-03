@@ -20,17 +20,17 @@ namespace Loja.Mvc.Areas.Admin
                 new { action = "Index", id = UrlParameter.Optional }
             );
 
-            context.MapRoute(
-                "Admin_Usuarios",
-                "Admin/Usuarios/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "Admin_Usuarios",
+            //    "Admin/Usuarios/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
 
-            context.MapRoute(
-                "Admin_Produtos",
-                "Admin/Produtos/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "Admin_Produtos",
+            //    "Admin/Produtos/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }
