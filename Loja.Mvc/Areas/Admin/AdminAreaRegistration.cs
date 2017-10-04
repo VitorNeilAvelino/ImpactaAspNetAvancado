@@ -23,13 +23,15 @@ namespace Loja.Mvc.Areas.Admin
             //context.MapRoute(
             //    "Admin_Usuarios",
             //    "Admin/Usuarios/{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
+            //    new { controller = "Produtos", action = "Index", id = UrlParameter.Optional },
+            //    new[] { "Loja.Mvc.Areas.Admin.Controllers.Usuarios" }
             //);
 
             //context.MapRoute(
             //    "Admin_Produtos",
             //    "Admin/Produtos/{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
+            //    new { controller = "Produtos", action = "Index", id = UrlParameter.Optional },
+            //    new[] { "Loja.Mvc.Areas.Admin.Controllers.Produtos" }
             //);
         }
     }
