@@ -5,6 +5,7 @@ using Loja.Dominio;
 using Loja.Repositorios.SqlServer.EF;
 using Loja.Mvc.Helpers;
 using Loja.Mvc.Areas.Vendas.Models;
+using System;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {
@@ -14,8 +15,10 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
         private LojaDbContext db = new LojaDbContext();
 
         // GET: Produtos
+        //[HandleError(ExceptionType = typeof(DivideByZeroException), View = "ZeroError")]
         public ActionResult Index()
         {
+            throw new Exception("Teste");
             return View(Mapeamento.Mapear(db.Produtos.ToList()));
         }
 

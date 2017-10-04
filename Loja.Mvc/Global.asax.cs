@@ -13,5 +13,11 @@ namespace Loja.Mvc
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            //_Logger.Error(ex);
+        }
     }
 }
