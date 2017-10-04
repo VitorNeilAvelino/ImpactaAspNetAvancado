@@ -23,6 +23,6 @@ textarea {
     max-width: 280px;
 }
 
-li.dropdown:hover > .dropdown-menu {
+/*li.dropdown:hover > .dropdown-menu {
     display: block;
-}
+}*/
