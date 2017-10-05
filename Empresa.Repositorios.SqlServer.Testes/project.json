@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Empresa.Dominio": "1.0.0-*",
+    "Empresa.Repositorios.SqlServer": "1.0.0-*",
+    "MSTest.TestFramework": "1.1.18",
+    "NETStandard.Library": "2.0.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}
