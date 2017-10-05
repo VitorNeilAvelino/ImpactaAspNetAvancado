@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Empresa.Repositorios.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,7 +32,8 @@ namespace Empresa.Mvc
             // Add framework services.
             services.AddMvc();
 
-            var connection = Configuration["DbConnectionString"];
+            services.AddDbContext<EmpresaDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("EmpresaConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
