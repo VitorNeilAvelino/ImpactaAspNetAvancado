@@ -7,16 +7,17 @@ namespace Empresa.Repositorios.SqlServer
     {
         public EmpresaDbContext(DbContextOptions options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Contato> Contatos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Contato>(entity =>
+            //{
+            //    entity.Property(e => e.Nome).IsRequired();
+            //});
         }
     }
 }
