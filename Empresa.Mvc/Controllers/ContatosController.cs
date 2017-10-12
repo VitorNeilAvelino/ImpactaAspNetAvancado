@@ -2,16 +2,19 @@
 using Empresa.Repositorios.SqlServer;
 using System.Linq;
 using Empresa.Dominio;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Empresa.Mvc.Controllers
 {
     public class ContatosController : Controller
     {
-        EmpresaDbContext _db;
+        private readonly EmpresaDbContext _db;
+        private readonly IDataProtector _protectorProvider;
 
-        public ContatosController(EmpresaDbContext db)
+        public ContatosController(EmpresaDbContext db, IDataProtectionProvider protectionProvider)
         {
             _db = db;
+            _protectorProvider = protectionProvider.CreateProtector(GetType().FullName);
         }
 
         public IActionResult Index()
@@ -32,6 +35,8 @@ namespace Empresa.Mvc.Controllers
             {
                 return View(contato);
             }
+
+            contato.Senha = _protectorProvider.Protect(contato.Senha);
 
             _db.Contatos.Add(contato);
             _db.SaveChanges();
