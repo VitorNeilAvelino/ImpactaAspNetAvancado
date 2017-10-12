@@ -16,11 +16,18 @@ namespace Empresa.Repositorios.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Deve vir primeiro.
+            // Deve vir primeiro, senão as tabelas do Identity não são criadas.
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Usuario>().ToTable("Usuario");
-            //modelBuilder.Entity<IdentityRole>().ToTable("Perfil");            
+            modelBuilder.Entity<Contato>().ToTable("Contato");
+            modelBuilder.Entity<Usuario>().ToTable("Usuario");            
+            
+            //modelBuilder.Entity<IdentityRole>().ToTable("Perfil");
+            //modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UsuarioPerfis");
+            //modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UsuarioLogins");
+            //modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UsuarioPermissoes");
+            //modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("PerfilPermissoes");
+            //modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UsuarioTokens");
         }
     }
 }
