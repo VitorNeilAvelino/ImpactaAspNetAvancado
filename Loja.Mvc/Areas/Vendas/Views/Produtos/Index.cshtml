@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CategoriaNome)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmLeilao)
+        </th>
         <th></th>
         <th></th>
     </tr>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoriaNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmLeilao)
             </td>
             <td>
                 <img src="~/ImagemProduto/Miniatura?produtoId=@item.Id" title="@item.Nome" class="img-circle" />
