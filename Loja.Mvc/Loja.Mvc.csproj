@@ -136,6 +136,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\Produtos\ProdutosController.cs" />
     <Compile Include="Areas\Admin\Controllers\Usuarios\UsuariosController.cs" />
+    <Compile Include="Areas\Vendas\Controllers\LeiloesController.cs" />
     <Compile Include="Areas\Vendas\VendasAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -164,6 +165,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Produtos\Index.cshtml" />
+    <Content Include="Areas\Vendas\Views\Leiloes\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
