@@ -1,0 +1,21 @@
+﻿@model Empresa.Mvc.ViewModels.LoginViewModel
+<h2>Login</h2>
+<hr />
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" name="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Senha">Senha:</label>
+        <input asp-for="Senha" type="password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Confirmar" class="btn btn-default" />
+    </div>
+    <br />
+</form>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/bundle.js"></script>
+}

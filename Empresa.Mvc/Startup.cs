@@ -1,10 +1,13 @@
 ﻿using Empresa.Repositorios.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
 
 namespace Empresa.Mvc
 {
@@ -47,6 +50,16 @@ namespace Empresa.Mvc
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "EmpresaCookieAuthentication",
+                LoginPath = new PathString("/Home/Login"),
+                AccessDeniedPath = new PathString("/Home/Login"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ExpireTimeSpan = TimeSpan.FromMinutes(1) // default: 14 dias.
+            });
 
             app.UseStaticFiles();
 

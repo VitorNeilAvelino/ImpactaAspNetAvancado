@@ -3,6 +3,8 @@ using Empresa.Repositorios.SqlServer;
 using System.Linq;
 using Empresa.Dominio;
 using Microsoft.AspNetCore.DataProtection;
+using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Empresa.Mvc.Controllers
 {
@@ -14,16 +16,24 @@ namespace Empresa.Mvc.Controllers
         public ContatosController(EmpresaDbContext db, IDataProtectionProvider protectionProvider)
         {
             _db = db;
-            _protectorProvider = protectionProvider.CreateProtector(GetType().FullName);
+            _protectorProvider = protectionProvider.CreateProtector(GetType().GetTypeInfo().Assembly.GetName().Name);
         }
 
+        [Authorize(Roles = "Gerente, Consultor")] // Case sensitive!
         public IActionResult Index()
-        {            
+        {
             return View(_db.Contatos.ToList());
         }
 
         public IActionResult Create()
         {
+            var podeCriar = User.HasClaim("Permissao", "CriarNovoContato");
+
+            if (!podeCriar)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
