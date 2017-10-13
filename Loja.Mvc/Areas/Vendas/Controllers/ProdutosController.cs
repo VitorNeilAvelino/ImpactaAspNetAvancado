@@ -5,7 +5,6 @@ using Loja.Dominio;
 using Loja.Repositorios.SqlServer.EF;
 using Loja.Mvc.Helpers;
 using Loja.Mvc.Areas.Vendas.Models;
-using System;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {
@@ -14,15 +13,12 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
         // ToDo: design pattern Unity of Work.
         private LojaDbContext db = new LojaDbContext();
 
-        // GET: Produtos
         //[HandleError(ExceptionType = typeof(DivideByZeroException), View = "ZeroError")]
         public ActionResult Index()
         {
-            throw new Exception("Teste");
             return View(Mapeamento.Mapear(db.Produtos.ToList()));
         }
 
-        // GET: Produtos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,15 +33,11 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
             return View(Mapeamento.Mapear(produto));
         }
 
-        // GET: Produtos/Create
         public ActionResult Create()
         {
             return View(Mapeamento.Mapear(new Produto(), db.Categorias.ToList()));
         }
 
-        // POST: Produtos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProdutoViewModel viewModel)
@@ -60,7 +52,6 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
             return View(viewModel);
         }
 
-        // GET: Produtos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)

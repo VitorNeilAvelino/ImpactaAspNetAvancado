@@ -1,13 +1,13 @@
 ﻿@model Loja.Mvc.Areas.Vendas.Models.ProdutoViewModel
 
 @{
-    ViewBag.Title = "Create";    
+    ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "Produtos", FormMethod.Post, new { enctype="multipart/form-data" }))
+@using (Html.BeginForm("Create", "Produtos", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -53,8 +53,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Imagem, 
-               new { @class = "form-control", type="file", accept="image/*" } )
+                @Html.TextBoxFor(model => model.Imagem,
+               new { @class = "form-control", type = "file", accept = "image/*" })
                 @Html.ValidationMessageFor(model => model.Imagem, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,7 +68,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { area = "vendas" }, null)
 </div>
 
 @section Scripts {

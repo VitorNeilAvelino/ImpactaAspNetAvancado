@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Empresa.Dominio.Contato>
+﻿@model IEnumerable<Loja.Mvc.Areas.Vendas.Models.ProdutoViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Produto", "Create", new { area = "vendas", controller = "Produtos" })
 </p>
 <table class="table">
     <tr>
@@ -27,29 +27,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Preco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estoque)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoriaNome)
-        </td>
-        <td>
-            <img src="~/ImagemProduto/Miniatura?produtoId=@item.Id" title="@item.Nome" class="img-circle" />
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estoque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaNome)
+            </td>
+            <td>
+                <img src="~/ImagemProduto/Miniatura?produtoId=@item.Id" title="@item.Nome" class="img-circle" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
