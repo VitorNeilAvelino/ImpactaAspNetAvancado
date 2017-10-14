@@ -6,9 +6,6 @@
 
 <h2>Produtos em leilão</h2>
 
-@*<p>
-    @Html.ActionLink("Novo Produto", "Create", new { area = "vendas", controller = "Produtos" })
-</p>*@
 <table class="table">
     <tr>
         <th>
@@ -52,11 +49,22 @@
                 <img src="~/ImagemProduto/Miniatura?produtoId=@item.Id" title="@item.Nome" class="img-circle" />
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
                 @Html.ActionLink("Details", "Details", new { id = item.Id })
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
             </td>
         </tr>
     }
-
 </table>
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+    <script type="text/javascript">
+        var connection = $.hubConnection();
+        var hub = connection.createHubProxy("LeilaoHub");
+
+        //"ATUALIZARLISTA": cusiosamente, não é case sensitive.
+        hub.on("atualizarListaProdutos", function () { document.location.href = "/Vendas/Leiloes/"; });
+
+        hub.Invoke("AdicionarComprador", "Fulano");
+
+        connection.start();
+    </script>
+}
