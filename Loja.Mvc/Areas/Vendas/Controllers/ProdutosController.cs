@@ -73,9 +73,6 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
             return View(Mapeamento.Mapear(produto, _db.Categorias.ToList()));
         }
 
-        // POST: Produtos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProdutoViewModel viewModel)
@@ -86,16 +83,13 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
 
                 Mapeamento.Mapear(viewModel, produto, _db);
 
-                //db.Entry(produto).State = EntityState.Modified;
-                //db.Entry(produto).CurrentValues.SetValues(viewModel);
-                //produto.Categoria = db.Categorias.Find(viewModel.CategoriaId);
-
                 _db.SaveChanges();
 
-                _leilaoHub?.Clients.All.atualizarListaProdutos();
+                _leilaoHub?.Clients.All.atualizarOfertas();
 
                 return RedirectToAction("Index");
             }
+
             return View(viewModel);
         }
 

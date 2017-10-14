@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Loja.Mvc.Areas.Vendas.Models.ProdutoViewModel>
 
 @{
-    ViewBag.Title = "Produtos em leilão";
+    ViewBag.Title = "Leilão";
 }
 
 <h2>Produtos em leilão</h2>
@@ -49,7 +49,7 @@
                 <img src="~/ImagemProduto/Miniatura?produtoId=@item.Id" title="@item.Nome" class="img-circle" />
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id })
             </td>
         </tr>
     }
@@ -61,9 +61,9 @@
         var hub = connection.createHubProxy("LeilaoHub");
 
         //"ATUALIZARLISTA": cusiosamente, não é case sensitive.
-        hub.on("atualizarListaProdutos", function () { document.location.href = "/Vendas/Leiloes/"; });
+        hub.on("atualizarOfertas", function () { document.location.reload(); });
 
-        hub.Invoke("AdicionarComprador", "Fulano");
+        //hub.Invoke("Participar",); // na página de Detalhes.
 
         connection.start();
     </script>
