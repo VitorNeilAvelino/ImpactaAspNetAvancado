@@ -192,6 +192,7 @@
     <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Produtos\Index.cshtml" />
     <Content Include="Areas\Vendas\Views\Leiloes\Index.cshtml" />
+    <Content Include="Areas\Vendas\Views\Leiloes\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -202,6 +203,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Leiloes\Details.js" />
     <Content Include="Scripts\methods_pt.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />

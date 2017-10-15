@@ -1,20 +1,23 @@
 ﻿using Microsoft.AspNet.SignalR;
+using System.Threading.Tasks;
 
 namespace Loja.Mvc.Hubs
 {
     public class LeilaoHub : Hub
     {
-        public void Participar(string produtoId)
+        public async Task Participar(string nomeParticipante, string produtoId)
         {
-            //Apenas o grupo que está na página do produto?
-            Groups.Add(Context.ConnectionId, produtoId);
-            Clients.Group(produtoId).adicionarMensagem(Context.User.Identity.Name + " entrou.");
-
-            //Clients.All.atualizarListaCompradoresLogados();
+            await Groups.Add(Context.ConnectionId, produtoId);
+            Clients.Group(produtoId).adicionarMensagem("Administrador", $"{nomeParticipante} entrou ({Context.ConnectionId}).");
 
             //Clients.All
             //Clients.Caller
             //Clients.Others
+        }
+
+        public void RealizarLance(string nomeParticipante, string valor, string produtoId)
+        {
+            Clients.Group(produtoId).adicionarMensagem(nomeParticipante, valor);
         }
     }
 }
