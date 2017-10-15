@@ -13,6 +13,7 @@ namespace Loja.Mvc.Hubs
             //Clients.All
             //Clients.Caller
             //Clients.Others
+            //Clients.Client(connectionId).seuMetodoJs()...
         }
 
         public void RealizarLance(string nomeParticipante, string valor, string produtoId)
