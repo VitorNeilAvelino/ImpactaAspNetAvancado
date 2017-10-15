@@ -7,7 +7,7 @@
 <h2>Leilão</h2>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h4>Detalhes do produto</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -78,11 +78,19 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h4>Lances realizados</h4>
         <hr />
         <table id="lancesRealizados" class='table table-striped'>
         </table>
+    </div>
+    <div class="col-md-4">
+        <h4>Chat</h4>
+        <hr />
+        <div style="min-height:330px">
+            <table id="usuariosConectados" class='table table-striped'></table>
+        </div>
+        <textarea id="mensagemChat" class="form-control" style="max-width:100%"></textarea>
     </div>
 </div>
 <div class="row">
