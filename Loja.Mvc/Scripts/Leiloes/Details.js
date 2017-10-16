@@ -54,7 +54,7 @@
 
     adicionarMensagem: function (nomeRemetente, connectionId, mensagem) {
         $("#lancesRealizadosTable").append(this.montarMensagem(nomeRemetente, connectionId, mensagem));
-        $('#lancesRealizadosDiv').animate({ scrollTop: $('#lancesRealizadosDiv').prop('scrollHeight') }, 500);
+        $("#lancesRealizadosDiv").animate({ scrollTop: $("#lancesRealizadosDiv").prop("scrollHeight") }, 500);
     },
 
     montarMensagem: function (nomeRemetente, connectionId, mensagem) {
