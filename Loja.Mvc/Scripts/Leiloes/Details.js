@@ -58,7 +58,7 @@
     },
 
     montarMensagem: function (nomeRemetente, connectionId, mensagem) {
-        var tr = "<tr>"
+        var tr = "<tr>";
         tr += "<td>" + nomeRemetente + "</td>";
         tr += "<td>" + mensagem + "</td>";
 
@@ -68,7 +68,9 @@
 
         tr += "<td>" + (enviadaPorMim ? "" : like) + "</td>";
 
-        return tr += "</tr>"
+        tr += "</tr>";
+
+        return tr;
     },
 
     realizarLance: function () {
