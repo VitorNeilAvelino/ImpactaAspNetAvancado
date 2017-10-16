@@ -64,7 +64,7 @@
 
         var like = "<a data-connection-id='" + connectionId + "' href='#'>" +
                     "<span class='glyphicon glyphicon-thumbs-up' style='font-size:18px'></span></a>";
-        var enviadaPorMim = this.connectionId == connectionId;
+        var enviadaPorMim = this.connectionId === connectionId;
 
         tr += "<td>" + (enviadaPorMim ? "" : like) + "</td>";
 
@@ -86,8 +86,8 @@
             .popover({
                 content: "<span class='glyphicon glyphicon-thumbs-up' style='font-size:24px'></span>",
                 html: true,
-                placement: 'left',
-                title: nomeRemetente + " diz"                
+                placement: "left",
+                title: nomeRemetente + " diz:"                
             })
             .popover("show");
     }
