@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Empresa.Mvc
 {
@@ -33,6 +34,15 @@ namespace Empresa.Mvc
 
             services.AddDbContext<EmpresaDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EmpresaConnectionString")));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Master", policy =>
+                    policy.RequireClaim("UserId", "1", "2", "3", "4", "5"));
+
+                options.AddPolicy("EmissorNf", policy =>
+                    policy.RequireRole("Contabil", "Administrativo")); // o usuário pode ter apenas um dos perfis.
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

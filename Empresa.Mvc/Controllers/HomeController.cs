@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Empresa.Mvc.Controllers
 {
@@ -25,6 +26,8 @@ namespace Empresa.Mvc.Controllers
             return View();
         }
 
+        //[Authorize(Roles = "Gerente, Consultor")] // Case sensitive, apenas um é suficiente.
+        [Authorize(Policy = "EmissorNf")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -32,6 +35,7 @@ namespace Empresa.Mvc.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -77,8 +81,10 @@ namespace Empresa.Mvc.Controllers
                         new Claim(ClaimTypes.Name, contato.Nome),
                         new Claim(ClaimTypes.Email, contato.Email),
                         new Claim(ClaimTypes.Role, "Vendedor"),
-                        new Claim(ClaimTypes.Role, "Consultor")//,
-                        //new Claim("Permissao", "CriarNovoContato")
+                        new Claim(ClaimTypes.Role, "Consultor"),
+                        new Claim(ClaimTypes.Role, "Contabil"),
+                        new Claim("Contato", "Criar")
+                        // Citar as policies em Startup.ConfigureServices
                     };
 
             var identidade = new ClaimsIdentity(claims, "EmpresaCookieAuthentication");

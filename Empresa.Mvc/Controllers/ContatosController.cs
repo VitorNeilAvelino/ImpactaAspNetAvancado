@@ -19,7 +19,6 @@ namespace Empresa.Mvc.Controllers
             _protectorProvider = protectionProvider.CreateProtector(GetType().GetTypeInfo().Assembly.GetName().Name);
         }
 
-        [Authorize(Roles = "Gerente, Consultor")] // Case sensitive!
         public IActionResult Index()
         {
             return View(_db.Contatos.ToList());
@@ -27,7 +26,7 @@ namespace Empresa.Mvc.Controllers
 
         public IActionResult Create()
         {
-            var podeCriar = User.HasClaim("Permissao", "CriarNovoContato");
+            var podeCriar = User.HasClaim("Contato", "Criar");
 
             if (!podeCriar)
             {
