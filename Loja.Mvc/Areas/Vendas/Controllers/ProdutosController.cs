@@ -12,7 +12,6 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
 {
     public class ProdutosController : Controller
     {
-        // ToDo: design pattern Unity of Work.
         private readonly LojaDbContext _db = new LojaDbContext();
         private readonly IHubContext _leilaoHub = GlobalHost.ConnectionManager.GetHubContext<LeilaoHub>();
 
