@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.IO;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Empresa.Mvc
 {
@@ -43,6 +41,13 @@ namespace Empresa.Mvc
                 options.AddPolicy("EmissorNf", policy =>
                     policy.RequireRole("Contabil", "Administrativo")); // o usuário pode ter apenas um dos perfis.
             });
+
+            // ASP.NET Core 2.0.
+            //services.AddAuthentication().AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,10 +71,18 @@ namespace Empresa.Mvc
                 AuthenticationScheme = "EmpresaCookieAuthentication",
                 LoginPath = new PathString("/Home/Login"),
                 AccessDeniedPath = new PathString("/Home/Login"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
+                AutomaticAuthenticate = true, // Confirma se o usuário está autenticado em cada request. Caso contrário, apenas nos requests em que o [Authorize] esteja envolvido.
+                AutomaticChallenge = true, // Sem o automático, o usuário não é reencaminhado automaticamente para a página de login.
                 ExpireTimeSpan = TimeSpan.FromMinutes(1) // default: 14 dias.
             });
+
+            // Tem que baixar os pacotes do Nuget.
+            //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?tabs=aspnetcore1x
+            //app.Use(Facebook|Google|etc)Authentication(new FacebookOptions()
+            //{
+            //    AppId = Configuration["Authentication:Facebook:AppId"],
+            //    AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            //});
 
             app.UseStaticFiles();
 
