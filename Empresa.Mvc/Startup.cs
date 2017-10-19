@@ -73,8 +73,12 @@ namespace Empresa.Mvc
                 AccessDeniedPath = new PathString("/Home/Login"),
                 AutomaticAuthenticate = true, // Confirma se o usuário está autenticado em cada request. Caso contrário, apenas nos requests em que o [Authorize] esteja envolvido.
                 AutomaticChallenge = true, // Sem o automático, o usuário não é reencaminhado automaticamente para a página de login.
-                ExpireTimeSpan = TimeSpan.FromMinutes(1) // default: 14 dias.
+                ExpireTimeSpan = TimeSpan.FromMinutes(1), // Default: 14 dias. Esse valor é um timeout de inatividade (dependendo da propriedade SlidingExpiration).
+
+                // Default: true. Define que o ExpireTimeSpan serve para inatividade. Se estiver false, o cookie será expirado, não importa de o usuário interagiu ou não com a aplicação.
+                //SlidingExpiration = false
             });
+
 
             // Tem que baixar os pacotes do Nuget.
             //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?tabs=aspnetcore1x
