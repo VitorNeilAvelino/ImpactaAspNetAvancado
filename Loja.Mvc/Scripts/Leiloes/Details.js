@@ -2,9 +2,10 @@
     leilaoHub: {},
     produtoId: 0,
     connectionId: "",
+    nomeParticipante: "",
 
     inicializar: function (produtoId) {
-        this.produtoId = produtoId;
+        this.produtoId = produtoId;        
         this.conectarLeilaoHub();
         this.vincularEventos();
     },
@@ -45,7 +46,9 @@
     },
 
     entrarLeilao: function () {
-        this.leilaoHub.invoke("Participar", $("#nomeParticipante").val(), this.produtoId);
+        this.nomeParticipante = $("#nomeParticipante").val();
+
+        this.leilaoHub.invoke("Participar", this.nomeParticipante, this.produtoId);
 
         $("#participanteDiv").hide();
         $("#lanceDiv").show();
@@ -54,7 +57,9 @@
 
     adicionarMensagem: function (nomeRemetente, connectionId, mensagem) {
         $("#lancesRealizadosTable").append(this.montarMensagem(nomeRemetente, connectionId, mensagem));
-        $("#lancesRealizadosDiv").animate({ scrollTop: $("#lancesRealizadosDiv").prop("scrollHeight") }, 500);
+
+        var lancesRealizadosDiv = $("#lancesRealizadosDiv");
+        lancesRealizadosDiv.animate({ scrollTop: lancesRealizadosDiv.prop("scrollHeight") }, 500);
     },
 
     montarMensagem: function (nomeRemetente, connectionId, mensagem) {
@@ -74,12 +79,12 @@
     },
 
     realizarLance: function () {
-        this.leilaoHub.invoke("RealizarLance", $("#nomeParticipante").val(), this.connectionId,
+        this.leilaoHub.invoke("RealizarLance", this.nomeParticipante, this.connectionId,
             $("#valorLance").val(), this.produtoId);
     },
 
     enviarLike: function (connectionIdDestinatario) {
-        this.leilaoHub.invoke("EnviarLike", $("#nomeParticipante").val(), connectionIdDestinatario);
+        this.leilaoHub.invoke("EnviarLike", this.nomeParticipante, connectionIdDestinatario);
     },
 
     receberLike: function (nomeRemetente) {
@@ -89,7 +94,7 @@
                 content: "<span class='glyphicon glyphicon-thumbs-up' style='font-size:24px'></span>",
                 html: true,
                 placement: "left",
-                title: nomeRemetente + " diz:"                
+                title: nomeRemetente + " diz:"
             })
             .popover("show");
     }
