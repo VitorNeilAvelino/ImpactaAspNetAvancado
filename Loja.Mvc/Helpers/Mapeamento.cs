@@ -22,7 +22,7 @@ namespace Loja.Mvc.Helpers
             return produtosViewModel;
         } 
 
-        public static Produto Mapear(ProdutoViewModel viewModel, LojaDbContext dbContext/*, HttpPostedFileBase imagemProduto*/)
+        public static Produto Mapear(ProdutoViewModel viewModel, LojaDbContext dbContext)
         {
             var produto = new Produto();
 
@@ -72,7 +72,7 @@ namespace Loja.Mvc.Helpers
             return viewModel;
         }
 
-        public static void Mapear(ProdutoViewModel viewModel, Produto produto, LojaDbContext dbContext/*, HttpPostedFileBase imagemProduto*/)
+        public static void Mapear(ProdutoViewModel viewModel, Produto produto, LojaDbContext dbContext)
         {
             dbContext.Entry(produto).CurrentValues.SetValues(viewModel);
 
