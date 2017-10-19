@@ -75,6 +75,7 @@ namespace Empresa.Mvc.Controllers
 
             // 1. Install-Package Microsoft.AspNetCore.Authentication.Cookies
             // 2. Startup.Configure
+            // 3. Configurar as permissões abaixo
 
             var claims = new List<Claim>
                     {
