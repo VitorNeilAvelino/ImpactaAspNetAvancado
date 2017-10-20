@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Empresa.Mvc.Controllers
 {
@@ -15,10 +15,11 @@ namespace Empresa.Mvc.Controllers
         private readonly EmpresaDbContext _db;
         private readonly IDataProtector _protectorProvider;
 
-        public HomeController(EmpresaDbContext db, IDataProtectionProvider protectionProvider)
+        public HomeController(EmpresaDbContext db, IDataProtectionProvider protectionProvider,
+            IConfiguration configuracao)
         {
             _db = db;
-            _protectorProvider = protectionProvider.CreateProtector(GetType().GetTypeInfo().Assembly.GetName().Name);
+            _protectorProvider = protectionProvider.CreateProtector(configuracao.GetSection("ChaveCriptografia").Value);
         }
 
         public IActionResult Index()
