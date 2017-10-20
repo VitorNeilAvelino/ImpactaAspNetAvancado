@@ -81,15 +81,17 @@ namespace Empresa.Mvc.Controllers
             // 3. Configurar as permissões abaixo
 
             var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, contato.Nome),
-                        new Claim(ClaimTypes.Email, contato.Email),
-                        new Claim(ClaimTypes.Role, "Vendedor"),
-                        new Claim(ClaimTypes.Role, "Consultor"),
-                        new Claim(ClaimTypes.Role, "Contabil"),
-                        new Claim("Contato", "Criar")
-                        // Citar as policies em Startup.ConfigureServices
-                    };
+            {
+                new Claim(ClaimTypes.Name, contato.Nome),
+                new Claim(ClaimTypes.Email, contato.Email),
+
+                new Claim(ClaimTypes.Role, "Vendedor"),
+                new Claim(ClaimTypes.Role, "Consultor"),
+                new Claim(ClaimTypes.Role, "Contabil"),
+
+                new Claim("Contato", "Criar")
+                // Citar as policies em Startup.ConfigureServices
+            };
 
             var identidade = new ClaimsIdentity(claims, _configuracao.GetSection("TipoAutenticacao").Value);
             var principal = new ClaimsPrincipal(identidade);
@@ -104,6 +106,11 @@ namespace Empresa.Mvc.Controllers
             HttpContext.Authentication.SignOutAsync(_configuracao.GetSection("TipoAutenticacao").Value);
                         
             return RedirectToAction("Index");
+        }
+
+        public IActionResult AcessoNegado()
+        {
+            return View();
         }
     }
 }

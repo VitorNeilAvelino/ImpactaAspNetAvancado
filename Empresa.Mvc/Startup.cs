@@ -71,7 +71,7 @@ namespace Empresa.Mvc
             {
                 AuthenticationScheme = Configuration.GetSection("TipoAutenticacao").Value,
                 LoginPath = new PathString("/Home/Login"),
-                AccessDeniedPath = new PathString("/Home/Login"),
+                AccessDeniedPath = new PathString("/Home/AcessoNegado"),
                 AutomaticAuthenticate = true, // Confirma se o usuário está autenticado em cada request. Caso contrário, apenas nos requests em que o [Authorize] esteja envolvido.
                 AutomaticChallenge = true, // Sem o automático, o usuário não é reencaminhado automaticamente para a página de login.
                 ExpireTimeSpan = TimeSpan.FromMinutes(10), // Default: 14 dias. Esse valor é um timeout de inatividade (dependendo da propriedade SlidingExpiration).
