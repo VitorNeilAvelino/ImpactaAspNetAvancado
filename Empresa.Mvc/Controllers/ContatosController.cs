@@ -26,12 +26,12 @@ namespace Empresa.Mvc.Controllers
 
         public IActionResult Create()
         {
-            var podeCriar = User.HasClaim("Contato", "Criar");
+            //var podeCriar = User.HasClaim("Contato", "Criar");
 
-            if (!podeCriar)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (!podeCriar)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return View();
         }
