@@ -14,12 +14,14 @@ namespace Empresa.Mvc.Controllers
     {
         private readonly EmpresaDbContext _db;
         private readonly IDataProtector _protectorProvider;
+        private readonly IConfiguration _configuracao;
 
         public HomeController(EmpresaDbContext db, IDataProtectionProvider protectionProvider,
             IConfiguration configuracao)
         {
             _db = db;
             _protectorProvider = protectionProvider.CreateProtector(configuracao.GetSection("ChaveCriptografia").Value);
+            _configuracao = configuracao;
         }
 
         public IActionResult Index()
@@ -89,17 +91,17 @@ namespace Empresa.Mvc.Controllers
                         // Citar as policies em Startup.ConfigureServices
                     };
 
-            var identidade = new ClaimsIdentity(claims, "EmpresaCookieAuthentication");
+            var identidade = new ClaimsIdentity(claims, _configuracao.GetSection("TipoAutenticacao").Value);
             var principal = new ClaimsPrincipal(identidade);
 
-            HttpContext.Authentication.SignInAsync("EmpresaCookieAuthentication", principal);
+            HttpContext.Authentication.SignInAsync(_configuracao.GetSection("TipoAutenticacao").Value, principal);
 
             return RedirectToAction("Index", "Contatos");            
         }
 
         public IActionResult Logout()
         {
-            HttpContext.Authentication.SignOutAsync("EmpresaCookieAuthentication");
+            HttpContext.Authentication.SignOutAsync(_configuracao.GetSection("TipoAutenticacao").Value);
                         
             return RedirectToAction("Index");
         }

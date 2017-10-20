@@ -66,9 +66,10 @@ namespace Empresa.Mvc
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // A ordem em que as configurações são feitas importa.
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationScheme = "EmpresaCookieAuthentication",
+                AuthenticationScheme = Configuration.GetSection("TipoAutenticacao").Value,
                 LoginPath = new PathString("/Home/Login"),
                 AccessDeniedPath = new PathString("/Home/Login"),
                 AutomaticAuthenticate = true, // Confirma se o usuário está autenticado em cada request. Caso contrário, apenas nos requests em que o [Authorize] esteja envolvido.
