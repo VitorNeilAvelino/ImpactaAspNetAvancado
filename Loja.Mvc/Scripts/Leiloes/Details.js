@@ -23,11 +23,16 @@
 
     vincularEventos: function () {
         var self = this;
+
+        // Não funciona...
         //$("#entrarButton").on("click", this.entrarLeilao);
         //$("#entrarButton").on("click", self.entrarLeilao);
         //$("#entrarButton").on("click", function () { this.entrarLeilao; });
         //$("#entrarButton").on("click", function () { this.entrarLeilao(); });
         //$("#entrarButton").on("click", function () { self.entrarLeilao; });
+
+        //Funciona!
+        //$("#entrarButton").on("click", this.entrarLeilao.bind(this));
 
         $("#entrarButton").on("click", function () { self.entrarLeilao(); });
         $("#enviarLanceButton").on("click", function () { self.realizarLance(); });
