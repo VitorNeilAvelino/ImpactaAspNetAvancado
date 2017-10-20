@@ -24,14 +24,14 @@ namespace Empresa.Mvc
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc();
 
             services.AddDbContext<EmpresaDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EmpresaConnectionString")));
+
+            services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddAuthorization(options =>
             {

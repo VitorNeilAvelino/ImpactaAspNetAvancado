@@ -3,8 +3,7 @@ using Empresa.Repositorios.SqlServer;
 using System.Linq;
 using Empresa.Dominio;
 using Microsoft.AspNetCore.DataProtection;
-using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Empresa.Mvc.Controllers
 {
@@ -13,10 +12,11 @@ namespace Empresa.Mvc.Controllers
         private readonly EmpresaDbContext _db;
         private readonly IDataProtector _protectorProvider;
 
-        public ContatosController(EmpresaDbContext db, IDataProtectionProvider protectionProvider)
+        public ContatosController(EmpresaDbContext db, IDataProtectionProvider protectionProvider, 
+            IConfiguration configuracao)
         {
             _db = db;
-            _protectorProvider = protectionProvider.CreateProtector(GetType().GetTypeInfo().Assembly.GetName().Name);
+            _protectorProvider = protectionProvider.CreateProtector(configuracao.GetSection("ChaveCriptografia").Value);
         }
 
         public IActionResult Index()
@@ -26,12 +26,12 @@ namespace Empresa.Mvc.Controllers
 
         public IActionResult Create()
         {
-            var podeCriar = User.HasClaim("Contato", "Criar");
+            //var podeCriar = User.HasClaim("Contato", "Criar");
 
-            if (!podeCriar)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (!podeCriar)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return View();
         }
