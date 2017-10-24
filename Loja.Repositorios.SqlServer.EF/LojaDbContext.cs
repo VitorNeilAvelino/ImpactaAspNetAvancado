@@ -1,17 +1,13 @@
 ﻿using Loja.Dominio;
 using Loja.Repositorios.SqlServer.EF.Migrations;
 using Loja.Repositorios.SqlServer.EF.ModelConfiguration;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Loja.Repositorios.SqlServer.EF
 {
-    public class LojaDbContext : DbContext
+    public class LojaDbContext : IdentityDbContext<Usuario>//DbContext
     {
         public LojaDbContext() : base("name=lojaConnectionString")
         {
@@ -24,16 +20,28 @@ namespace Loja.Repositorios.SqlServer.EF
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        //public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Deve vir primeiro, senão as tabelas do Identity não são criadas.
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            //modelBuilder.Entity<IdentityRole>().ToTable("Perfil");
+            //modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UsuarioPerfis");
+            //modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UsuarioLogins");
+            //modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UsuarioPermissoes");
+
+            // Apenas para .NET Core
+            //modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("PerfilPermissoes");
+            //modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UsuarioTokens");
 
             modelBuilder.Configurations.Add(new ProdutoConfiguration());
             modelBuilder.Configurations.Add(new ProdutoImagemConfiguration());
             modelBuilder.Configurations.Add(new CategoriaConfiguration());
-
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new UsuarioConfiguration());
         }
     }
 }
