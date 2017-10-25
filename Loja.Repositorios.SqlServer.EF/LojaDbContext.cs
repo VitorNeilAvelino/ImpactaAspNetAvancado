@@ -20,6 +20,8 @@ namespace Loja.Repositorios.SqlServer.EF
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        
+        // Já é realizado na herança acima.
         //public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
