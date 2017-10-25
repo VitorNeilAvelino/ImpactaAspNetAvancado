@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Loja.Mvc.App_Start.Startup))]
+[assembly: OwinStartup(typeof(Loja.Mvc.Startup))]
 
-namespace Loja.Mvc.App_Start
+namespace Loja.Mvc
 {
     public class Startup
     {
