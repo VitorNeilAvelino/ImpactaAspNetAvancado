@@ -3,9 +3,12 @@ using Loja.Repositorios.SqlServer.EF;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Loja.Dominio;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {
+    //[AuthorizeRole(Perfil.Master)]
+    [AuthorizeRole(Perfil.Leiloeiro, Perfil.Comprador)]
     public class LeiloesController : Controller
     {
         private readonly LojaDbContext _db = new LojaDbContext();
