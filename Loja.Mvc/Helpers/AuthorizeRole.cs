@@ -1,6 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
 using Loja.Dominio;
-using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+using System.Web.Mvc;
 
 namespace Loja.Mvc.Helpers
 {
@@ -10,17 +11,10 @@ namespace Loja.Mvc.Helpers
         {
             foreach (var perfil in perfis)
             {
-                Roles += perfil.ToString() + ",";
+                Roles += perfil + ",";
             }
+
+            //Roles = string.Join(",", perfis.Select(p => Enum.GetName(p.GetType(), p)));
         }
-        
-        //public Perfil Perfil { get; set; }
-
-        //public override void OnAuthorization(AuthorizationContext filterContext)
-        //{
-        //    base.Roles = Perfil.ToString();
-
-        //    base.OnAuthorization(filterContext);
-        //}
     }
 }
