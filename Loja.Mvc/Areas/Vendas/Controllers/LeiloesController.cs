@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Loja.Dominio;
+using Loja.Mvc.Filtros;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {

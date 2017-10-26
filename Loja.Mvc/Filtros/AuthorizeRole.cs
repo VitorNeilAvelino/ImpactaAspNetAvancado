@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using Loja.Dominio;
+﻿using Loja.Dominio;
 using System.Web.Mvc;
 
-namespace Loja.Mvc.Helpers
+namespace Loja.Mvc.Filtros
 {
     public class AuthorizeRole : AuthorizeAttribute
     {
