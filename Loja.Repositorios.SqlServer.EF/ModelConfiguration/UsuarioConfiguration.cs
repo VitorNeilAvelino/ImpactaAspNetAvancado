@@ -7,7 +7,7 @@ namespace Loja.Repositorios.SqlServer.EF.ModelConfiguration
     {
         public UsuarioConfiguration()
         {
-            Ignore(u => u.Nome);
+            //Ignore(u => u.Nome);
         }
     }
 }
