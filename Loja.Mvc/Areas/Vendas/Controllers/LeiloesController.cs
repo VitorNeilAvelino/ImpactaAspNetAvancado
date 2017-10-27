@@ -5,6 +5,8 @@ using System.Net;
 using System.Web.Mvc;
 using Loja.Dominio;
 using Loja.Mvc.Filtros;
+using System.Security.Claims;
+using System.Threading;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {
@@ -24,6 +26,13 @@ namespace Loja.Mvc.Areas.Vendas.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+            if (!identity.HasClaim(Modulo.Leilao.ToString(), Acao.Detalhar.ToString()))
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
 
             var produto = _db.Produtos.Find(id);
