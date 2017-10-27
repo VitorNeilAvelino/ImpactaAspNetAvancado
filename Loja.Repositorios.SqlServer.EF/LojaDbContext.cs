@@ -31,11 +31,11 @@ namespace Loja.Repositorios.SqlServer.EF
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //modelBuilder.Entity<Usuario>().ToTable("Usuario");
-            //modelBuilder.Entity<IdentityRole>().ToTable("Perfil");
-            //modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioPerfis");
-            //modelBuilder.Entity<IdentityUserLogin>().ToTable("UsuarioLogins");
-            //modelBuilder.Entity<IdentityUserClaim>().ToTable("UsuarioPermissoes");
+            modelBuilder.Entity<Usuario>().ToTable("Usuario");
+            modelBuilder.Entity<IdentityRole>().ToTable("Perfil");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UsuarioPerfis");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UsuarioLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UsuarioPermissoes");
 
             // Apenas para .NET Core
             //modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("PerfilPermissoes");
@@ -44,7 +44,7 @@ namespace Loja.Repositorios.SqlServer.EF
             modelBuilder.Configurations.Add(new ProdutoConfiguration());
             modelBuilder.Configurations.Add(new ProdutoImagemConfiguration());
             modelBuilder.Configurations.Add(new CategoriaConfiguration());
-            modelBuilder.Configurations.Add(new UsuarioConfiguration());
+            //modelBuilder.Configurations.Add(new UsuarioConfiguration());
         }
     }
 }

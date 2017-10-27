@@ -1,13 +1,15 @@
 namespace Loja.Repositorios.SqlServer.EF.Migrations
 {
     using Dominio;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Loja.Repositorios.SqlServer.EF.LojaDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LojaDbContext>
     {
         public Configuration()
         {
@@ -27,6 +29,19 @@ namespace Loja.Repositorios.SqlServer.EF.Migrations
             {
                 context.Produtos.AddRange(ObterProdutos(context));
                 context.SaveChanges();
+            }
+
+            if (!context.Roles.Any())
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var administrador = new IdentityRole { Name = "Administrador" };
+                var comprador = new IdentityRole { Name = "Comprador" };
+                var leiloeiro = new IdentityRole { Name = "Leiloeiro" };
+
+                manager.Create(administrador);
+                manager.Create(comprador);
+                manager.Create(leiloeiro);
             }
 
             base.Seed(context);

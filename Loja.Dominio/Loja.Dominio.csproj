@@ -57,7 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acao.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Modulo.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="Produto.cs" />
     <Compile Include="ProdutoImagem.cs" />

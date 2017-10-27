@@ -71,13 +71,9 @@
     <Compile Include="Migrations\201710132132196_AddProdutoEmLeilao.Designer.cs">
       <DependentUpon>201710132132196_AddProdutoEmLeilao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710250043056_Identity.cs" />
-    <Compile Include="Migrations\201710250043056_Identity.Designer.cs">
-      <DependentUpon>201710250043056_Identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710260120460_UsuarioNome.cs" />
-    <Compile Include="Migrations\201710260120460_UsuarioNome.Designer.cs">
-      <DependentUpon>201710260120460_UsuarioNome.cs</DependentUpon>
+    <Compile Include="Migrations\201710262342407_Identity.cs" />
+    <Compile Include="Migrations\201710262342407_Identity.Designer.cs">
+      <DependentUpon>201710262342407_Identity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\CategoriaConfiguration.cs" />
@@ -106,11 +102,8 @@
     <EmbeddedResource Include="Migrations\201710132132196_AddProdutoEmLeilao.resx">
       <DependentUpon>201710132132196_AddProdutoEmLeilao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710250043056_Identity.resx">
-      <DependentUpon>201710250043056_Identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710260120460_UsuarioNome.resx">
-      <DependentUpon>201710260120460_UsuarioNome.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710262342407_Identity.resx">
+      <DependentUpon>201710262342407_Identity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

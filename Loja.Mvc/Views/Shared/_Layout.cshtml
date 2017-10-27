@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Loja.Dominio
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,8 +27,15 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendas <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Produtos", "Index", "Produtos", new { Area = "Vendas" }, new { })</li>
-                            <li class="divider"/>
-                            <li>@Html.ActionLink("Leilões", "Index", new { Controller="Leiloes", Area = "Vendas" })</li>
+
+                            @*@if (User.IsInRole(Perfil.Master.ToString()))*@
+                            @{ var user = (System.Security.Claims.ClaimsIdentity)User.Identity; }
+                            @if (user.HasClaim(Modulo.Leilao.ToString(), Acao.Inserir.ToString()))
+                            {
+                                <li class="divider" />
+                                <li>@Html.ActionLink("Leilões", "Index", new { Controller = "Leiloes", Area = "Vendas" })</li>
+                            }
+
                         </ul>
                     </li>                    
                 </ul>

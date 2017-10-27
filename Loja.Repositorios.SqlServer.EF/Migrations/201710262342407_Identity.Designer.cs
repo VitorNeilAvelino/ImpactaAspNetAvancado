@@ -7,13 +7,13 @@ namespace Loja.Repositorios.SqlServer.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UsuarioNome : IMigrationMetadata
+    public sealed partial class Identity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UsuarioNome));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Identity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710260120460_UsuarioNome"; }
+            get { return "201710262342407_Identity"; }
         }
         
         string IMigrationMetadata.Source

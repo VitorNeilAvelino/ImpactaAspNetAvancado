@@ -8,7 +8,7 @@ namespace Loja.Repositorios.SqlServer.EF.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.Perfil",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -18,26 +18,26 @@ namespace Loja.Repositorios.SqlServer.EF.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.UsuarioPerfis",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
-                        Usuario_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.Usuario", t => t.Usuario_Id)
-                .Index(t => t.RoleId)
-                .Index(t => t.Usuario_Id);
+                .ForeignKey("dbo.Perfil", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.Usuario", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.Usuario",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Nome = c.String(),
                         Cpf = c.String(),
-                        Email = c.String(),
+                        Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
@@ -47,55 +47,55 @@ namespace Loja.Repositorios.SqlServer.EF.Migrations
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(),
+                        UserName = c.String(nullable: false, maxLength: 256),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.AspNetUserClaims",
+                "dbo.UsuarioPermissoes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(),
+                        UserId = c.String(nullable: false, maxLength: 128),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
-                        Usuario_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Usuario", t => t.Usuario_Id)
-                .Index(t => t.Usuario_Id);
+                .ForeignKey("dbo.Usuario", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
+                "dbo.UsuarioLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
                         ProviderKey = c.String(nullable: false, maxLength: 128),
                         UserId = c.String(nullable: false, maxLength: 128),
-                        Usuario_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.Usuario", t => t.Usuario_Id)
-                .Index(t => t.Usuario_Id);
+                .ForeignKey("dbo.Usuario", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "Usuario_Id", "dbo.Usuario");
-            DropForeignKey("dbo.AspNetUserLogins", "Usuario_Id", "dbo.Usuario");
-            DropForeignKey("dbo.AspNetUserClaims", "Usuario_Id", "dbo.Usuario");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropIndex("dbo.AspNetUserLogins", new[] { "Usuario_Id" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "Usuario_Id" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "Usuario_Id" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
+            DropForeignKey("dbo.UsuarioPerfis", "UserId", "dbo.Usuario");
+            DropForeignKey("dbo.UsuarioLogins", "UserId", "dbo.Usuario");
+            DropForeignKey("dbo.UsuarioPermissoes", "UserId", "dbo.Usuario");
+            DropForeignKey("dbo.UsuarioPerfis", "RoleId", "dbo.Perfil");
+            DropIndex("dbo.UsuarioLogins", new[] { "UserId" });
+            DropIndex("dbo.UsuarioPermissoes", new[] { "UserId" });
+            DropIndex("dbo.Usuario", "UserNameIndex");
+            DropIndex("dbo.UsuarioPerfis", new[] { "RoleId" });
+            DropIndex("dbo.UsuarioPerfis", new[] { "UserId" });
+            DropIndex("dbo.Perfil", "RoleNameIndex");
+            DropTable("dbo.UsuarioLogins");
+            DropTable("dbo.UsuarioPermissoes");
             DropTable("dbo.Usuario");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.UsuarioPerfis");
+            DropTable("dbo.Perfil");
         }
     }
 }
