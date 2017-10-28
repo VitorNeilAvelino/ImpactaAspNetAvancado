@@ -5,7 +5,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 //using Microsoft.Owin.Security.Google;
 using Owin;
-using Loja.Mvc.Models;
 using Loja.Repositorios.SqlServer.EF;
 using Loja.Dominio;
 
@@ -56,9 +55,9 @@ namespace Loja.Mvc
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "1949591158616536",
-            //   appSecret: "4c9cd397df874a6e9187faf1e950bb53");
+            app.UseFacebookAuthentication(
+               appId: "182410978989614",
+               appSecret: "12bb857865c03c2c7a51fea4fbf70ad9");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
