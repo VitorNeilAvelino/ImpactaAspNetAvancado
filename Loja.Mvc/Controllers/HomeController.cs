@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Loja.Mvc.Helpers;
 
 namespace Loja.Mvc.Controllers
 {
@@ -10,7 +9,26 @@ namespace Loja.Mvc.Controllers
     {
         public ActionResult Index()
         {
+            DefinirLinguagemPadrao();
             return View();
+        }
+
+        private void DefinirLinguagemPadrao()
+        {
+            if (Request.Cookies["linguagemSelecionada"] != null) return;
+
+            var linguagem = CulturaHelper.LinguagemPadrao;
+
+            if (Request.UserLanguages != null && Request.UserLanguages[0] != string.Empty)
+            {
+                linguagem = Request.UserLanguages[0];
+            }
+
+            var linguagemSelecionadaCookie = new HttpCookie("linguagemSelecionada", linguagem);
+
+            linguagemSelecionadaCookie.Expires = DateTime.MaxValue;
+
+            Response.Cookies.Add(linguagemSelecionadaCookie);
         }
 
         public ActionResult About()
@@ -25,6 +43,13 @@ namespace Loja.Mvc.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult DefinirLinguagem(string linguagem)
+        {
+            Response.Cookies["linguagemSelecionada"].Value = linguagem;
+
+            return RedirectToAction("Index");
         }
     }
 }
