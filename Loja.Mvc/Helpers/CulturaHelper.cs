@@ -4,32 +4,49 @@ using System.Web;
 
 namespace Loja.Mvc.Helpers
 {
-    public static class CulturaHelper
+    public class CulturaHelper
     {
+        public CulturaHelper()
+        {
+            ObterRegiao();
+        }
+
         public const string LinguagemPadrao = "pt-BR";
 
-        private static List<string> LinguagensSuportadas { get; } = 
-            new List<string> { "pt-BR", "en-US", "es"};
+        public string NomeNativo { get; set; }
 
-        public static RegionInfo ObterCultura()
+        public string Abreviacao { get; set; }
+
+        public CultureInfo CultureInfo { get; set; }
+        
+        private List<string> LinguagensSuportadas { get; } =
+            new List<string> { "pt-BR", "en-US", "es" };
+
+        private void ObterRegiao()
         {
             var linguagem = LinguagemPadrao;
-            var linguagemCookie = HttpContext.Current.Request.Cookies["linguagemSelecionada"];
+            var linguagemSelecionada = HttpContext.Current.Request.Cookies["linguagemSelecionada"];
 
-            if (linguagemCookie != null)
+            if (linguagemSelecionada != null)
             {
-                linguagem = LinguagensSuportadas.Contains(linguagemCookie.Value) ? linguagemCookie.Value : LinguagemPadrao;
+                linguagem = LinguagensSuportadas.Contains(linguagemSelecionada.Value) ?
+                    linguagemSelecionada.Value :
+                    LinguagemPadrao;
             }
 
             var cultura = CultureInfo.CreateSpecificCulture(linguagem);
 
-            return new RegionInfo(cultura.LCID);
+            this.CultureInfo = cultura;
+
+            var regiao = new RegionInfo(cultura.LCID);
+
+            NomeNativo = regiao.NativeName;
+            Abreviacao = regiao.TwoLetterISORegionName.ToLower();
 
             //return Thread.CurrentThread.CurrentCulture.Name; //pt-BR 
             //return Thread.CurrentThread.CurrentCulture.DisplayName; //Português (Brasil) 
             //return Thread.CurrentThread.CurrentCulture.NativeName; //português (Brasil) 
             //return Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName; //por
-
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Loja.Mvc.Areas.Vendas.Models.ProdutoViewModel>
+﻿@using Loja.Resources
+@model IEnumerable<Loja.Mvc.Areas.Vendas.Models.ProdutoViewModel>
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
+<h2>@Resource.NomeModuloProdutos</h2>
 <p>
     @Html.ActionLink("Novo Produto", "Create", new { area = "vendas", controller = "Produtos" })
 </p>

@@ -309,6 +309,10 @@
       <Project>{3cf1e0b2-8b77-4989-a55f-f79679840979}</Project>
       <Name>Loja.Repositorios.SqlServer.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Loja.Resources\Loja.Resources.csproj">
+      <Project>{5354d510-f132-43e9-b01c-60d442f6e4b7}</Project>
+      <Name>Loja.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Globalization;
+using System.Threading;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Loja.Mvc.Helpers;
 
 namespace Loja.Mvc
 {
@@ -20,6 +24,14 @@ namespace Loja.Mvc
         {
             var ex = Server.GetLastError();
             //_Logger.Error(ex);
+        }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            var cultura = new CulturaHelper();
+
+            Thread.CurrentThread.CurrentUICulture = cultura.CultureInfo;
+            Thread.CurrentThread.CurrentCulture = cultura.CultureInfo;
         }
     }
 }

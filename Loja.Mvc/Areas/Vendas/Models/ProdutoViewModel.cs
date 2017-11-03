@@ -16,6 +16,7 @@ namespace Loja.Mvc.Areas.Vendas.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "NomeProdutoLabel", ResourceType = typeof(Resources.Resource))]
         public string Nome { get; set; }
 
         [Required]

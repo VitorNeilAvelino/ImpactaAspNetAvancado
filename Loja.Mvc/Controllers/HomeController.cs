@@ -47,7 +47,18 @@ namespace Loja.Mvc.Controllers
 
         public ActionResult DefinirLinguagem(string linguagem)
         {
-            Response.Cookies["linguagemSelecionada"].Value = linguagem;
+            var linguagemSelecionada = Response.Cookies["linguagemSelecionada"];
+
+            if (linguagemSelecionada != null)
+            {
+                linguagemSelecionada.Value = linguagem;
+            }
+            else
+            {
+                DefinirLinguagemPadrao();
+            }
+
+            if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
 
             return RedirectToAction("Index");
         }
