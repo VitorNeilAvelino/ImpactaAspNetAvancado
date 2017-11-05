@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-//using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.Google;
 using Owin;
 using Loja.Repositorios.SqlServer.EF;
 using Loja.Dominio;
@@ -55,15 +55,15 @@ namespace Loja.Mvc
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "182410978989614",
-               appSecret: "12bb857865c03c2c7a51fea4fbf70ad9");
+            //app.UseFacebookAuthentication(
+            //   appId: "182410978989614",
+            //   appSecret: "12bb857865c03c2c7a51fea4fbf70ad9");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "302464958730-d9v5142svkcubk9kscg90hj6eum5ugnn.apps.googleusercontent.com",
+                ClientSecret = "9JbI6TYxhZPwYkpkQl0BaZby"
+            });
         }
     }
 }

@@ -6,6 +6,9 @@ namespace Loja.Mvc.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        public string Nome { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
