@@ -31,20 +31,6 @@ namespace Loja.Mvc.Controllers
             Response.Cookies.Add(linguagemSelecionadaCookie);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult DefinirLinguagem(string linguagem)
         {
             var linguagemSelecionada = Response.Cookies["linguagemSelecionada"];
@@ -61,6 +47,20 @@ namespace Loja.Mvc.Controllers
             if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
 
             return RedirectToAction("Index");
+        }
+        
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }
