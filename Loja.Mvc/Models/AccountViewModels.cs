@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Loja.Mvc.Validacoes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Loja.Mvc.Models
@@ -71,10 +74,15 @@ namespace Loja.Mvc.Models
         public string Nome { get; set; }
 
         [Required]
+        [DisplayName("Data de Nascimento")]
+        [IdadeMinima(18)]
+        public DateTime DataNascimento { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
+        
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
         [DataType(DataType.Password)]
