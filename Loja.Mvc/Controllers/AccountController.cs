@@ -178,8 +178,14 @@ namespace Loja.Mvc.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult VerificarDisponibilidadeEmail(string email)
+        {
+            return Json(UserManager.FindByEmail(email) == null);
+        }
+
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {

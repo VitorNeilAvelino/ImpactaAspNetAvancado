@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Loja.Mvc.Models
 {
@@ -80,7 +81,7 @@ namespace Loja.Mvc.Models
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Remote("VerificarDisponibilidadeEmail", "Account", HttpMethod = "POST", ErrorMessage = "Email já utilizado.")]
         public string Email { get; set; }
         
         [Required]
@@ -91,7 +92,7 @@ namespace Loja.Mvc.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -110,7 +111,7 @@ namespace Loja.Mvc.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
