@@ -1,9 +1,10 @@
 ﻿var Index = {
     inicializar: function () {
         this.conectarLeilaoHub();
+        ko.applyBindings(this.indexViewModel);
     },
 
-    conectarLeilaoHub: function(){
+    conectarLeilaoHub: function () {
         var connection = $.hubConnection();
         var hub = connection.createHubProxy("LeilaoHub");
 
@@ -13,7 +14,14 @@
         connection.start();
     },
 
-    atualizarOfertas: function(){
-        document.location.reload();
+    atualizarOfertas: function () {
+        //document.location.reload();
+        this.indexViewModel.produtos.push(
+            { id: 1, nome: "Grampeador", preco: 18.51, estoque: 51, categoriaNome: "Papelaria" }
+        );
+    },
+
+    indexViewModel: {
+        produtos: ko.observableArray()
     }
 };

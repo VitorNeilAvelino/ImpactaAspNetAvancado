@@ -6,9 +6,6 @@ using System.Web.Mvc;
 using Loja.Dominio;
 using Loja.Mvc.Filtros;
 using System.Security.Claims;
-using System.Threading;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {

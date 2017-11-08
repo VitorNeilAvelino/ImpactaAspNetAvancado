@@ -53,21 +53,22 @@
                 </td>
             </tr>
         }*@
-    <tr data-bind="foreach: produtos">
-        <td data-bind="text: nome" />
-        <td data-bind="text: preco" />
-        <td data-bind="text: estoque" />
-        <td data-bind="text: categoriaNome" />
-        <td data-bind="text: emLeilao" />
-        <td>
-            <img data-bind="attr: {src: '~/ImagemProduto/Miniatura?produtoId=' + id, title: nome}" class="img-circle" />
-        </td>
-        <td>
-            <a data-bind="attr: {href: 'Edit/id=' + id}" /> |
-            <a data-bind="attr: {href: 'Details/id=' + id}" /> |
-            <a data-bind="attr: {href: 'Delete/id=' + id}" />
-        </td>
-    </tr>
+    <tbody data-bind="foreach: produtos">
+        <tr>
+            <td data-bind="text: nome" />
+            <td data-bind="text: preco" />
+            <td data-bind="text: estoque" />
+            <td data-bind="text: categoriaNome" />
+            <td>
+                <img data-bind="attr: {src: '~/ImagemProduto/Miniatura?produtoId=' + id, title: nome}" class="img-circle" />
+            </td>
+            <td>
+                <a data-bind="attr: {href: 'Edit/id=' + id}" /> |
+                <a data-bind="attr: {href: 'Details/id=' + id}" /> |
+                <a data-bind="attr: {href: 'Delete/id=' + id}" />
+            </td>
+        </tr>
+    </tbody>
 </table>
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
