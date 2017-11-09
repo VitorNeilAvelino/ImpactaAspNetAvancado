@@ -1,7 +1,7 @@
 ﻿var Index = {
     inicializar: function () {
         this.conectarLeilaoHub();
-        ko.applyBindings(this.indexViewModel);
+        ko.applyBindings(this.viewModel);
     },
 
     conectarLeilaoHub: function () {
@@ -16,12 +16,12 @@
 
     atualizarOfertas: function () {
         //document.location.reload();
-        this.indexViewModel.produtos.push(
+        this.viewModel.produtos.push(
             { id: 1, nome: "Grampeador", preco: 18.51, estoque: 51, categoriaNome: "Papelaria" }
         );
     },
 
-    indexViewModel: {
+    viewModel: {
         produtos: ko.observableArray()
     }
 };
