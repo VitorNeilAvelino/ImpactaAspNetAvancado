@@ -20,9 +20,6 @@
         <th>
             @Html.DisplayNameFor(model => model.CategoriaNome)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmLeilao)
-        </th>
         <th></th>
         <th></th>
     </tr>
@@ -60,12 +57,10 @@
             <td data-bind="text: estoque" />
             <td data-bind="text: categoriaNome" />
             <td>
-                <img data-bind="attr: {src: '~/ImagemProduto/Miniatura?produtoId=' + id, title: nome}" class="img-circle" />
+                <img data-bind="attr: {src: '/Vendas/ImagemProduto/Miniatura?produtoId=' + id, title: nome}" class="img-circle" />
             </td>
             <td>
-                <a data-bind="attr: {href: 'Edit/id=' + id}" /> |
-                <a data-bind="attr: {href: 'Details/id=' + id}" /> |
-                <a data-bind="attr: {href: 'Delete/id=' + id}" />
+                <a data-bind="attr: {href: '/Vendas/Leiloes/Details?id=' + id}">Detalhes</a>
             </td>
         </tr>
     </tbody>

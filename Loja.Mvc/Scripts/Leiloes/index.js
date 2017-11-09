@@ -2,6 +2,7 @@
     inicializar: function () {
         this.conectarLeilaoHub();
         ko.applyBindings(this.viewModel);
+        this.getOfertas();
     },
 
     conectarLeilaoHub: function () {
@@ -9,19 +10,30 @@
         var hub = connection.createHubProxy("LeilaoHub");
 
         //"ATUALIZARLISTA": cusiosamente, não é case sensitive.
-        hub.on("atualizarOfertas", this.atualizarOfertas.bind(this));
+        hub.on("atualizarOfertas", this.getOfertas.bind(this));
 
         connection.start();
     },
 
-    atualizarOfertas: function () {
+    atualizarOfertas: function (produtos) {
         //document.location.reload();
-        this.viewModel.produtos.push(
-            { id: 1, nome: "Grampeador", preco: 18.51, estoque: 51, categoriaNome: "Papelaria" }
-        );
+
+        //this.viewModel.produtos.push(
+        //    { id: 1, nome: "Grampeador", preco: 18.51, estoque: 51, categoriaNome: "Papelaria" }
+        //);
+
+        this.viewModel.produtos(produtos);
     },
 
     viewModel: {
         produtos: ko.observableArray()
+    },
+
+    getOfertas: function () {
+        var self = this;
+
+        return $.getJSON("/api/Leiloes", function (produtos) {
+            self.atualizarOfertas(produtos);
+        });
     }
 };

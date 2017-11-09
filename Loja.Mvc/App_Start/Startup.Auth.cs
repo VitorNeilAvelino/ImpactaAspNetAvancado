@@ -61,8 +61,8 @@ namespace Loja.Mvc
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "199324344410-moe51ki88ppc69ps5ag4a5m60dnqjhpf.apps.googleusercontent.com",
-                ClientSecret = "yHSVX5esyY2mwSZs4TSwWi8c"
+                ClientId = "837445555842-gdluvr41nl4e3rmo6btot7vft2fioaor.apps.googleusercontent.com",
+                ClientSecret = "KygyzOfW9pW2HSGvP2n3sGNv"
             });
         }
     }
