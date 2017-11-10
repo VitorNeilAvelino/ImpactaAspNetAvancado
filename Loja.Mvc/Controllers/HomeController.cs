@@ -15,7 +15,7 @@ namespace Loja.Mvc.Controllers
 
         private void DefinirLinguagemPadrao()
         {
-            if (Request.Cookies["linguagemSelecionada"] != null) return;
+            if (Request.Cookies[Cookie.LinguagemSelecionada.ToString()] != null) return;
 
             var linguagem = CulturaHelper.LinguagemPadrao;
 
@@ -24,8 +24,7 @@ namespace Loja.Mvc.Controllers
                 linguagem = Request.UserLanguages[0];
             }
 
-            var linguagemSelecionadaCookie = new HttpCookie("linguagemSelecionada", linguagem);
-
+            var linguagemSelecionadaCookie = new HttpCookie(Cookie.LinguagemSelecionada.ToString(), linguagem);
             linguagemSelecionadaCookie.Expires = DateTime.MaxValue;
 
             Response.Cookies.Add(linguagemSelecionadaCookie);
@@ -33,20 +32,22 @@ namespace Loja.Mvc.Controllers
 
         public ActionResult DefinirLinguagem(string linguagem)
         {
-            var linguagemSelecionada = Response.Cookies["linguagemSelecionada"];
+            //if (Request.Cookies["linguagemSelecionada"] != null)
+            //{
+            //    Response.Cookies["linguagemSelecionada"].Value = linguagem;
+            //}
+            //else
+            //{
+            //    DefinirLinguagemPadrao();
+            //}
 
-            if (linguagemSelecionada != null)
-            {
-                linguagemSelecionada.Value = linguagem;
-            }
-            else
-            {
-                DefinirLinguagemPadrao();
-            }
+            //if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
 
-            if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
+            //return RedirectToAction("Index");
 
-            return RedirectToAction("Index");
+            Response.Cookies[Cookie.LinguagemSelecionada.ToString()].Value = linguagem;
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
         
         public ActionResult About()

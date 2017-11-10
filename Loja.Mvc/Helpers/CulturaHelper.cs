@@ -13,33 +13,29 @@ namespace Loja.Mvc.Helpers
 
         public const string LinguagemPadrao = "pt-BR";
 
+        private List<string> LinguagensSuportadas { get; } =
+            new List<string> { "pt-BR", "en-US", "es" };
+
         public string NomeNativo { get; set; }
 
         public string Abreviacao { get; set; }
 
         public CultureInfo CultureInfo { get; set; }
-        
-        private List<string> LinguagensSuportadas { get; } =
-            new List<string> { "pt-BR", "en-US", "es" };
 
         private void ObterRegiao()
         {
             var linguagem = LinguagemPadrao;
-            var linguagemSelecionada = HttpContext.Current.Request.Cookies["linguagemSelecionada"];
+            var linguagemSelecionada = HttpContext.Current.Request.Cookies[Cookie.LinguagemSelecionada.ToString()];
 
-            if (linguagemSelecionada != null)
+            if (linguagemSelecionada != null && LinguagensSuportadas.Contains(linguagemSelecionada.Value))
             {
-                linguagem = LinguagensSuportadas.Contains(linguagemSelecionada.Value) ?
-                    linguagemSelecionada.Value :
-                    LinguagemPadrao;
+                linguagem = linguagemSelecionada.Value;
             }
 
             var cultura = CultureInfo.CreateSpecificCulture(linguagem);
-
             this.CultureInfo = cultura;
 
             var regiao = new RegionInfo(cultura.LCID);
-
             NomeNativo = regiao.NativeName;
             Abreviacao = regiao.TwoLetterISORegionName.ToLower();
 
