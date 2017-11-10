@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leilões</title>
+    <meta charset="utf-8" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container body-content">
+    <form action="/api/Leiloes" id="leilaoForm" method="post">
+        <div class="form-horizontal">
+            <h4>Leilão</h4>
+            <hr />
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    <label for="lote" class="control-label">Lote</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="lote" name="lote" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    <label for="preco" class="control-label">Preço</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="preco" name="preco" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    <label for="produtosId" class="control-label">Produtos</label>
+                </div>
+                <div class="col-md-10">
+                    <select id="produtosId" name="produtosId" class="form-control" multiple="multiple" ></select>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Salvar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Scripts/bootstrap.min.js"></script>
+<script src="/Scripts/select2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        vincularEventos();
+        obterProdutos();
+    });
+
+    function vincularEventos() {
+        //ko.bindings
+        vincularSubmeter();
+    }
+
+    function vincularSubmeter() {
+        $("#leilaoForm").on("submit", function (event) {
+            var form = $(this);
+
+            $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: {} // trocar por um objeto que represente o produto a ser inserido.
+                })
+                .success(function (data) {
+                    console.log(data);
+
+                    alert("Produto gravado com sucesso!");
+                    form[0].reset();
+                    $("#categoriaId").html("");
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+
+                    alert("Erro ao gravar o produto.");
+                });
+
+            event.preventDefault();
+        });
+    }
+
+    function obterProdutos() {
+        $("#produtosId").select2({
+            minimumResultsForSearch: -1,
+            delay: 500,
+
+            ajax: {
+                url: "/api/Leiloes",
+                dataType: 'json',
+
+                processResults: function (data) {
+                    var results = [];
+
+                    $.each(data, function (index, produto) {
+                        results.push({
+                            id: produto.id, // id - case sensitive.
+                            text: produto.nome // nome - case sensitive.
+                        });
+                    });
+
+                    return {
+                        results: results
+                    };
+                }
+            }
+        });
+    }
+</script>
