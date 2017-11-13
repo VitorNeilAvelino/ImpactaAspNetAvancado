@@ -21,7 +21,7 @@
                     <label for="lote" class="control-label">Lote</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="lote" name="lote" class="form-control" />
+                    <input type="text" id="lote" data-bind="value: lote" name="lote" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
                     <label for="preco" class="control-label">Preço</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="preco" name="preco" class="form-control" />
+                    <input type="text" id="preco" data-bind="value: preco" name="preco" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
@@ -37,7 +37,7 @@
                     <label for="produtosId" class="control-label">Produtos</label>
                 </div>
                 <div class="col-md-10">
-                    <select id="produtosId" name="produtosId" class="form-control" multiple="multiple" ></select>
+                    <select id="produtosId" name="produtosId" data-bind="value: produtosId" class="form-control" multiple="multiple" ></select>
                 </div>
             </div>
             <hr />
@@ -51,6 +51,7 @@
 </div>
 </body>
 </html>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
 <script src="/Scripts/jquery-1.10.2.min.js"></script>
 <script src="/Scripts/bootstrap.min.js"></script>
 <script src="/Scripts/select2.min.js"></script>
@@ -61,7 +62,7 @@
     });
 
     function vincularEventos() {
-        //ko.bindings
+        ko.applyBindings(viewModel/*, "elementoId"*/);
         vincularSubmeter();
     }
 
@@ -69,23 +70,25 @@
         $("#leilaoForm").on("submit", function (event) {
             var form = $(this);
 
-            $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: {} // trocar por um objeto que represente o produto a ser inserido.
-                })
-                .success(function (data) {
-                    console.log(data);
+            console.log(ko.toJSON(viewModel));
 
-                    alert("Produto gravado com sucesso!");
-                    form[0].reset();
-                    $("#categoriaId").html("");
-                })
-                .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log(errorThrown);
+            //$.ajax({
+            //        type: form.attr('method'),
+            //        url: form.attr('action'),
+            //        data: viewModel
+            //    })
+            //    .success(function (data) {
+            //        console.log(data);
 
-                    alert("Erro ao gravar o produto.");
-                });
+            //        alert("Produto gravado com sucesso!");
+            //        form[0].reset();
+            //        $("#categoriaId").html("");
+            //    })
+            //    .fail(function (jqXHR, textStatus, errorThrown) {
+            //        console.log(errorThrown);
+
+            //        alert("Erro ao gravar o produto.");
+            //    });
 
             event.preventDefault();
         });
@@ -117,4 +120,10 @@
             }
         });
     }
+
+    var viewModel = {
+        lote: ko.observable(""),
+        preco: ko.observable(0),
+        produtosId: ko.observableArray()
+    };
 </script>
