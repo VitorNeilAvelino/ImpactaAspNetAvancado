@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace Loja.Mvc.Areas.Vendas.Controllers
 {
     //[AuthorizeRole(Perfil.Master)]
-    [AuthorizeRole(Perfil.Leiloeiro, Perfil.Comprador)]
+    //[AuthorizeRole(Perfil.Leiloeiro, Perfil.Comprador)]
     public class LeiloesController : Controller
     {
         private readonly LojaDbContext _db = new LojaDbContext();
