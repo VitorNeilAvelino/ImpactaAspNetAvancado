@@ -21,7 +21,7 @@
                     <label for="lote" class="control-label">Lote</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="lote" data-bind="value: lote" name="lote" class="form-control" />
+                    <input type="text" id="lote" data-bind="value: lote, valueUpdate:'keyup'" name="lote" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
@@ -43,7 +43,7 @@
             <hr />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Salvar" class="btn btn-default" />
+                    <input type="submit" data-bind="enable: validarFormulario" value="Salvar" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -124,6 +124,10 @@
     var viewModel = {
         lote: ko.observable(""),
         preco: ko.observable(0),
-        produtosId: ko.observableArray()
+        produtosId: ko.observableArray(),
+
+        validarFormulario: ko.pureComputed(function () {
+            return viewModel.lote();
+        })
     };
 </script>
