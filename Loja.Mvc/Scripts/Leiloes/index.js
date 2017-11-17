@@ -9,7 +9,6 @@
         var connection = $.hubConnection();
         var hub = connection.createHubProxy("LeilaoHub");
 
-        //"ATUALIZARLISTA": cusiosamente, não é case sensitive.
         hub.on("atualizarOfertas", this.getOfertas.bind(this));
 
         connection.start();
@@ -32,7 +31,7 @@
     getOfertas: function () {
         var self = this;
 
-        return $.getJSON("/api/Leiloes", function (produtos) {
+        return $.getJSON("/api/Vendas/Leiloes", function (produtos) {
             self.atualizarOfertas(produtos);
         });
     }
