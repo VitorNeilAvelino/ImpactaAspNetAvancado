@@ -19,7 +19,7 @@ namespace Loja.Mvc.Areas.Vendas
             GlobalConfiguration.Configure(x => x.MapHttpAttributeRoutes());
 
             context.Routes.MapHttpRoute(
-                name: "DefaultVendasApi",
+                name: "VendasDefaultApi",
                 routeTemplate: "api/Vendas/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );

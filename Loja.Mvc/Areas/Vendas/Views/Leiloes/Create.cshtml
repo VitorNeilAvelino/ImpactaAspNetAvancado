@@ -11,44 +11,45 @@
     <link href="/Content/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
-<div class="container body-content">
-    <form action="/api/Leiloes" id="leilaoForm" method="post">
-        <div class="form-horizontal">
-            <h4>Leilão</h4>
-            <hr />
-            <div class="form-group">
-                <div class="control-label col-md-2">
-                    <label for="lote" class="control-label">Lote</label>
+    <div class="container body-content">
+        <form action="/api/Vendas/Leiloes" id="leilaoForm" method="post">
+            <div class="form-horizontal">
+                <h4>Leilão</h4>
+                <hr />
+                <div class="form-group">
+                    <div class="control-label col-md-2">
+                        <label for="lote" class="control-label">Lote</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" id="lote" data-bind="value: lote, valueUpdate:'keyup'" name="lote" class="form-control" />
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    <input type="text" id="lote" data-bind="value: lote, valueUpdate:'keyup'" name="lote" class="form-control" />
+                <div class="form-group">
+                    <div class="control-label col-md-2">
+                        <label for="preco" class="control-label">Preço</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" id="preco" data-bind="value: preco" name="preco" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2">
+                        <label for="produtosId" class="control-label">Produtos</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select id="produtosId" name="produtosId" data-bind="selectedOptions: produtosId" class="form-control"
+                                multiple="multiple"></select>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" data-bind="enable: validarFormulario" value="Salvar" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="control-label col-md-2">
-                    <label for="preco" class="control-label">Preço</label>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" id="preco" data-bind="value: preco" name="preco" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="control-label col-md-2">
-                    <label for="produtosId" class="control-label">Produtos</label>
-                </div>
-                <div class="col-md-10">
-                    <select id="produtosId" name="produtosId" data-bind="value: produtosId" class="form-control" multiple="multiple" ></select>
-                </div>
-            </div>
-            <hr />
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" data-bind="enable: validarFormulario" value="Salvar" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </body>
 </html>
 <script src="~/Scripts/knockout-3.4.2.js"></script>
@@ -70,25 +71,23 @@
         $("#leilaoForm").on("submit", function (event) {
             var form = $(this);
 
-            console.log(ko.toJSON(viewModel));
+            $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: ko.toJSON(viewModel)
+                })
+                .success(function (data) {
+                    console.log(data);
 
-            //$.ajax({
-            //        type: form.attr('method'),
-            //        url: form.attr('action'),
-            //        data: viewModel
-            //    })
-            //    .success(function (data) {
-            //        console.log(data);
+                    alert("Leilão gravado com sucesso!");
+                    form[0].reset();
+                    $("#produtosId").html("");
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
 
-            //        alert("Produto gravado com sucesso!");
-            //        form[0].reset();
-            //        $("#categoriaId").html("");
-            //    })
-            //    .fail(function (jqXHR, textStatus, errorThrown) {
-            //        console.log(errorThrown);
-
-            //        alert("Erro ao gravar o produto.");
-            //    });
+                    alert("Erro ao gravar o leilão.");
+                });
 
             event.preventDefault();
         });
@@ -100,7 +99,7 @@
             delay: 500,
 
             ajax: {
-                url: "/api/Leiloes",
+                url: "/api/Vendas/Leiloes",
                 dataType: 'json',
 
                 processResults: function (data) {
@@ -129,5 +128,5 @@
         validarFormulario: ko.pureComputed(function () {
             return viewModel.lote();
         })
-    };
+    };    
 </script>
