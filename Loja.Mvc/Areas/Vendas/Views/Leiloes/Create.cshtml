@@ -126,7 +126,9 @@
         produtosId: ko.observableArray(),
 
         validarFormulario: ko.pureComputed(function () {
-            return viewModel.lote();
+            return viewModel.lote() &&
+                viewModel.preco() &&
+                viewModel.produtosId().length;
         })
     };    
 </script>
