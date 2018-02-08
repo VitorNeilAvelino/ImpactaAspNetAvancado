@@ -1,5 +1,6 @@
 ﻿using Empresa.Repositorios.SqlServer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,18 @@ namespace Empresa.Mvc
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            SetDataProtector();
+        }
+
+        private void SetDataProtector()
+        {
+            DataProtector = DataProtectionProvider.Create(this.GetType().FullName).CreateProtector(Configuration.GetSection("ChaveCriptografia").Value);
         }
 
         public IConfigurationRoot Configuration { get; }
+
+        public IDataProtector DataProtector { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -32,7 +42,8 @@ namespace Empresa.Mvc
                 options.UseSqlServer(Configuration.GetConnectionString("EmpresaConnectionString")));
 
             services.AddSingleton<IConfiguration>(Configuration);
-
+            services.AddSingleton<IDataProtector>(DataProtector);
+            
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Master", policy =>
