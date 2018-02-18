@@ -17,9 +17,9 @@ namespace Loja.Mvc.Hubs
             //Clients.Client(connectionId).seuMetodoJs()...
         }
 
-        public void RealizarLance(string nomeParticipante, string connectionId, string valor, string produtoId)
+        public void RealizarLance(string nomeParticipante, string valor, string produtoId)
         {
-            Clients.Group(produtoId).adicionarMensagem(nomeParticipante, connectionId, valor);
+            Clients.Group(produtoId).adicionarMensagem(nomeParticipante, Context.ConnectionId, valor);
         }
 
         public void EnviarLike(string nomeRemetente, string connectionIdDestinatario)

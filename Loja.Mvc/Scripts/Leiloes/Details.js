@@ -84,8 +84,7 @@
     },
 
     realizarLance: function () {
-        this.leilaoHub.invoke("RealizarLance", this.nomeParticipante, this.connectionId,
-            $("#valorLance").val(), this.produtoId);
+        this.leilaoHub.invoke("RealizarLance", this.nomeParticipante, $("#valorLance").val(), this.produtoId);
     },
 
     enviarLike: function (connectionIdDestinatario) {
