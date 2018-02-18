@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
 
@@ -6,36 +7,47 @@ namespace Loja.Mvc.Helpers
 {
     public class CulturaHelper
     {
+        private const string LinguagemPadrao = "pt-BR";
+        private string _linguagemSelecionada = LinguagemPadrao;
+
         public CulturaHelper()
         {
-            ObterRegiao();
+            DefinirLinguagemPadrao();
+            ObterRegionInfo();
         }
 
-        public const string LinguagemPadrao = "pt-BR";
-
-        private List<string> LinguagensSuportadas { get; } =
-            new List<string> { "pt-BR", "en-US", "es" };
+        private List<string> LinguagensSuportadas { get; } = new List<string> { "pt-BR", "en-US", "es" };
 
         public string NomeNativo { get; set; }
 
         public string Abreviacao { get; set; }
 
-        public CultureInfo CultureInfo { get; set; }
-
-        private void ObterRegiao()
+        private void DefinirLinguagemPadrao()
         {
-            var linguagem = LinguagemPadrao;
-            var linguagemSelecionada = HttpContext.Current.Request.Cookies[Cookie.LinguagemSelecionada.ToString()];
+            var request = HttpContext.Current.Request;
 
-            if (linguagemSelecionada != null && LinguagensSuportadas.Contains(linguagemSelecionada.Value))
+            if (request.Cookies["LinguagemSelecionada"] != null)
             {
-                linguagem = linguagemSelecionada.Value;
+                _linguagemSelecionada = request.Cookies["LinguagemSelecionada"].Value;
+                return;
             }
 
-            var cultura = CultureInfo.CreateSpecificCulture(linguagem);
-            this.CultureInfo = cultura;
+            if (request.UserLanguages != null && LinguagensSuportadas.Contains(request.UserLanguages[0]))
+            {
+                _linguagemSelecionada = request.UserLanguages[0];
+            }
 
+            var cookie = new HttpCookie("LinguagemSelecionada", _linguagemSelecionada);
+            cookie.Expires = DateTime.MaxValue;
+
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+
+        private void ObterRegionInfo()
+        {
+            var cultura = CultureInfo.CreateSpecificCulture(_linguagemSelecionada);
             var regiao = new RegionInfo(cultura.LCID);
+
             NomeNativo = regiao.NativeName;
             Abreviacao = regiao.TwoLetterISORegionName.ToLower();
 
@@ -43,6 +55,14 @@ namespace Loja.Mvc.Helpers
             //return Thread.CurrentThread.CurrentCulture.DisplayName; //Português (Brasil) 
             //return Thread.CurrentThread.CurrentCulture.NativeName; //português (Brasil) 
             //return Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName; //por
+        }
+
+        public static CultureInfo ObterCultureInfo()
+        {
+            var linguagemSelecionada = HttpContext.Current.Request.Cookies["LinguagemSelecionada"];
+            var linguagem = linguagemSelecionada?.Value ?? LinguagemPadrao;
+
+            return CultureInfo.CreateSpecificCulture(linguagem);
         }
     }
 }

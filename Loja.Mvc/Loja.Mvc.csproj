@@ -416,7 +416,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5593</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5593/</IISUrl>
+          <IISUrl>http://localhost:5534/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

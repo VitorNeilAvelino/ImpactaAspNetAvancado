@@ -29,12 +29,12 @@ namespace Loja.Mvc
             //_Logger.Error(ex);
         }
 
-        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        protected void Application_AcquireRequestState()
         {
-            var cultura = new CulturaHelper();
+            var cultura = CulturaHelper.ObterCultureInfo();
 
-            Thread.CurrentThread.CurrentUICulture = cultura.CultureInfo;
-            Thread.CurrentThread.CurrentCulture = cultura.CultureInfo;
+            Thread.CurrentThread.CurrentCulture = cultura;
+            Thread.CurrentThread.CurrentUICulture = cultura;
         }
     }
 }
